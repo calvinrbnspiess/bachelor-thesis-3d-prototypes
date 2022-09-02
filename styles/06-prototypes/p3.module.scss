@@ -2,23 +2,35 @@
 
 .prototype :global {
 
-  .hero {
-    &__media {
-      width: 100vw;
-      height: 100%;
-      left: 0;
+    .hero {
+      &__media {
+        width: 100vw;
+        height: 100%;
+        left: 0;
+
+        model-viewer {
+          width: 100%;
+          height: 100%;
+          transform: unset;
+        }
+      }
+    }
+
+  .section--configurator {
+    .grid {
+      grid-template-columns: 1fr;
+      grid-template-areas: "content";
+
+      .grid__column {
+        grid-area: content;
+      }
 
       model-viewer {
-        width: 100%;
-        height: 100%;
-        transform: unset;
+        //z-index: -1;
+        --progress-bar-color: transparent;
       }
     }
   }
-
-  /**
-    Prototype dependent styles
-   */
 
   .product-configurator {
     &__container {
@@ -32,32 +44,16 @@
     }
   }
 
-  .product-configurator__container {
-    width: 100%;
-    height: 650px;
+  .annotation-graphic__container {
+    height: 60vh;
+    position: relative;
 
     model-viewer {
       width: 100%;
-      height: 100%;
+      max-width: unset;
+      height: auto;
+      aspect-ratio: 16/9;
     }
-  }
-
-  .annotation-graphic__container {
-    height: 100vh;
-  }
-
-  .annotation-graphic__container model-viewer {
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-
-    max-width: unset;
-  }
-
-  :not(:defined) > * {
-    display: none;
   }
 
   model-viewer {
@@ -65,6 +61,5 @@
     --poster-color: transparent;
     --min-hotspot-opacity: 0;
   }
-
 
 }

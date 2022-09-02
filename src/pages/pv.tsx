@@ -1,13 +1,11 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import classnames from "classnames";
 import PrototypePage from "../components/PrototypePage";
 import * as css from "../../styles/06-prototypes/p1.module.scss";
 import { getPrototypeStylesheet } from "../helpers/styles";
 import { AnnotationsGraphic } from "../components/AnnotationsGraphic";
 import content from "../content";
 
-const Home: NextPage = () => {
+const Prototype: NextPage = () => {
   return (
     <PrototypePage
       id={"PV"}
@@ -52,4 +50,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Prototype;

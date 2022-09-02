@@ -27,6 +27,12 @@
     max-width: var(--max-width-stretched);
   }
 
+  &--seamless {
+    margin: unset;
+    max-width: unset;
+    padding: unset;
+  }
+
   &--solid {
     width: 100%;
 

@@ -5,6 +5,7 @@
   .hero {
     &__media model-viewer   {
       height: 100%;
+      @extend %model-viewer-bg;
     }
   }
 
@@ -45,10 +46,6 @@
     height: auto;
     aspect-ratio: 1 / 0.9;
     @extend %model-viewer-bg;
-  }
-
-  :not(:defined) > * {
-    display: none;
   }
 
   model-viewer {

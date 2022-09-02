@@ -1,6 +1,12 @@
 import Head from "next/head";
 import classnames from "classnames";
-import { ReactNode, useCallback, useEffect, useState } from "react";
+import {
+  CSSProperties,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { reportWebVitals } from "../pages/_app";
 import Link from "next/link";
 
@@ -31,7 +37,6 @@ const PrototypePage = (props: PrototypePageProps) => {
           width: window.screen.width,
           height: window.screen.height,
           pixelRatio: window.devicePixelRatio,
-          timeOrigin: performance.timeOrigin,
         },
         usage: {
           timeOrigin: performance.timeOrigin,
@@ -96,7 +101,9 @@ const PrototypePage = (props: PrototypePageProps) => {
             </button>
           </p>
         </section>
-        <section className={classnames("section", "section--solid")}>
+        <section
+          className={classnames("section", "section--solid", "section--kpi")}
+        >
           <div className={classnames("section__container")}>
             <div className={classnames("grid", "grid--50-50")}>
               <div className={classnames("grid__column")}>
@@ -137,7 +144,8 @@ const PrototypePage = (props: PrototypePageProps) => {
           className={classnames(
             "section",
             "section__container",
-            "section--stretched"
+            "section--stretched",
+            "section--configurator"
           )}
         >
           <div className={classnames("grid", "grid--50-50")}>
@@ -150,6 +158,45 @@ const PrototypePage = (props: PrototypePageProps) => {
                 individuelle Z900. Somit ist dein neues Motorrad ganz nach
                 deinem Geschmack.
               </p>
+              <div
+                className={classnames(
+                  "color-picker",
+                  "color-picker__container"
+                )}
+              >
+                <span
+                  className={classnames("color-picker__item")}
+                  style={
+                    {
+                      "--color": "#E2001A",
+                    } as CSSProperties
+                  }
+                />
+                <span
+                  className={classnames("color-picker__item")}
+                  style={
+                    {
+                      "--color": "#FFFFFF",
+                    } as CSSProperties
+                  }
+                />
+                <span
+                  className={classnames("color-picker__item")}
+                  style={
+                    {
+                      "--color": "#5ABF16",
+                    } as CSSProperties
+                  }
+                />
+                <span
+                  className={classnames("color-picker__item")}
+                  style={
+                    {
+                      "--color": "#1D212B",
+                    } as CSSProperties
+                  }
+                />
+              </div>
             </div>
             <div className={classnames("grid__column")}>
               {props.configuratorSlot}
@@ -160,7 +207,8 @@ const PrototypePage = (props: PrototypePageProps) => {
           className={classnames(
             "section",
             "section__container",
-            "section--stretched"
+            "section--stretched",
+            "section--annotation"
           )}
         >
           <h2 className={classnames("section__headline")}>
@@ -172,8 +220,8 @@ const PrototypePage = (props: PrototypePageProps) => {
             2020 erhält sie darüber hinaus einen überarbeiteten steiferen Rahmen
             und neu abgestimmte Federelemente.
           </p>
-          {props.annotationsSlot}
         </section>
+        {props.annotationsSlot}
         <footer className={classnames("footer", "footer__container")}>
           <div className={classnames("footer__copyright")}>
             2022 © LINGNER.COM

@@ -1,0 +1,37 @@
+@use "../01-settings/helpers" as *;
+
+.color-picker {
+
+  &__container {
+    display: flex;
+    gap: var(--gap-default);
+    margin: remcalc(30) 0;
+  }
+
+  &__item {
+    width: remcalc(50);
+    height: remcalc(50);
+    position: relative;
+    border-radius: 50%;
+    border: remcalc(2) solid transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color);
+      border-radius: 50%;
+      transform: scale(0.85);
+    }
+
+    &--active {
+      border: remcalc(2) solid var(--color-white)
+    }
+  }
+
+}

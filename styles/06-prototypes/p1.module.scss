@@ -41,10 +41,6 @@
     @extend %model-viewer-bg;
   }
 
-  :not(:defined) > * {
-    display: none;
-  }
-
   model-viewer {
     --progress-bar-color: var(--color-headline);
     --poster-color: transparent;
