@@ -124,7 +124,7 @@ const PrototypePage = (props: PrototypePageProps) => {
                     </div>
                     <div className={classnames("kpi__item")}>
                       Reifen
-                      <strong>17"</strong>
+                      <strong>{'17"'}</strong>
                       Aluminium
                     </div>
                   </div>
