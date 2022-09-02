@@ -1,0 +1,50 @@
+@use "../01-settings/helpers" as *;
+@use "../03-elements/section" as *;
+
+
+.navigation {
+
+  &__container {
+    padding: remcalc(35) var(--padding-horizontal-page);
+
+    @extend %section, .section--stretched;
+  }
+
+  &__logo {
+
+    display: flex;
+    gap: remcalc(7);
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &:before {
+      content: attr(data-prototype-id);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: remcalc(27);
+      height: remcalc(27);
+      border: 3px solid var(--color-text);
+
+      color: var(--color-text);
+
+      text-transform: uppercase;
+
+      font-size: remcalc(12);
+      font-weight: 700;
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      height: remcalc(27);
+      width: remcalc(250);
+      background-color: var(--color-text);
+    }
+  }
+
+}

@@ -1,0 +1,18 @@
+@use "../01-settings/helpers" as *;
+@use "../03-elements/section" as *;
+
+.annotation-graphic {
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    margin: remcalc(120) 0;
+    position: relative;
+
+    img, model-viewer {
+      width: 100%;
+      max-width: remcalc(650);
+    }
+  }
+
+}

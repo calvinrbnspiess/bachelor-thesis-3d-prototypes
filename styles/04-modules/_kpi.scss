@@ -1,0 +1,39 @@
+@use "../01-settings/helpers" as *;
+@use "../01-settings/variables" as *;
+
+.kpi {
+
+  &__container {
+    border-top: 1px solid var(--color-headline);
+    border-bottom: 1px solid var(--color-headline);
+  }
+
+  &__content {
+    padding: remcalc(20) remcalc(28);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    gap: var(--gap-default);
+
+    @media (min-width: $min-xxl) {
+      gap: remcalc(50);
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: remcalc(10);
+
+    color: var(--color-text);
+
+    strong {
+      font-weight: 700;
+      font-size: remcalc(21);
+
+      color: var(--color-white);
+    }
+  }
+
+}

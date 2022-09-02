@@ -1,0 +1,28 @@
+@use "../01-settings/helpers" as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,700;0,800;1,400&display=swap');
+
+* {
+  font-family: 'Work Sans', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+}
+
+p {
+  line-height: 1.2;
+  color: var(--color-text);
+
+  max-width: 60ch;
+}
+
+a {
+  font-weight: normal;
+  color: var(--color-text);
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: remcalc(5);
+  }
+}

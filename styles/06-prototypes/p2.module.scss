@@ -1,0 +1,61 @@
+@use "../01-settings/helpers" as *;
+
+.prototype :global {
+
+  .hero {
+    &__media model-viewer   {
+      height: 100%;
+    }
+  }
+
+  /**
+    Prototype dependent styles
+   */
+
+  %model-viewer-bg {
+    background: var(--gradient-black-box);
+    border: 0.25px solid rgba(255,255,255,0.1);
+    border-radius: 5px;
+  }
+
+  .product-configurator {
+    &__container {
+      width: 100%;
+      height: 650px;
+      @extend %model-viewer-bg;
+
+      model-viewer {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .product-configurator__container {
+    width: 100%;
+    height: 650px;
+
+    model-viewer {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .annotation-graphic__container model-viewer {
+    height: auto;
+    aspect-ratio: 1 / 0.9;
+    @extend %model-viewer-bg;
+  }
+
+  :not(:defined) > * {
+    display: none;
+  }
+
+  model-viewer {
+    --progress-bar-color: var(--color-headline);
+    --poster-color: transparent;
+    --min-hotspot-opacity: 0;
+  }
+
+
+}

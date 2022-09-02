@@ -1,0 +1,3 @@
+type PrototypeStylesheet = {
+  prototype: string;
+};

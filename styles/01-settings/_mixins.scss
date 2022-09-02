@@ -1,0 +1,25 @@
+@use "variables" as *;
+@use "helpers" as *;
+
+//  Fluid sizing depending on screen width, with min and max value
+//  based on example here https://css-tricks.com/snippets/css/fluid-typography/
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+@mixin fluid-type(
+  $type,
+  $value-min,
+  $value-max,
+  $screen-min: $min-content,
+  $screen-max: $max-content
+) {
+  #{$type}: remcalc($value-min);
+  @media only screen and (min-width: #{$screen-min}px) {
+    #{$type}: calc(
+            #{$value-min}px + #{($value-max - $value-min)} *
+            (100vw - #{$screen-min}px) / (#{$screen-max} - #{$screen-min})
+    );
+  }
+  @media only screen and (min-width: #{$screen-max}px) {
+    #{$type}: remcalc($value-max);
+  }
+}
+

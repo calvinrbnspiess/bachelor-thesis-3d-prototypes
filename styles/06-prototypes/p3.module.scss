@@ -1,0 +1,70 @@
+@use "../01-settings/helpers" as *;
+
+.prototype :global {
+
+  .hero {
+    &__media {
+      width: 100vw;
+      height: 100%;
+      left: 0;
+
+      model-viewer {
+        width: 100%;
+        height: 100%;
+        transform: unset;
+      }
+    }
+  }
+
+  /**
+    Prototype dependent styles
+   */
+
+  .product-configurator {
+    &__container {
+      width: 100%;
+      height: 650px;
+
+      model-viewer {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .product-configurator__container {
+    width: 100%;
+    height: 650px;
+
+    model-viewer {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .annotation-graphic__container {
+    height: 100vh;
+  }
+
+  .annotation-graphic__container model-viewer {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    max-width: unset;
+  }
+
+  :not(:defined) > * {
+    display: none;
+  }
+
+  model-viewer {
+    --progress-bar-color: var(--color-headline);
+    --poster-color: transparent;
+    --min-hotspot-opacity: 0;
+  }
+
+
+}

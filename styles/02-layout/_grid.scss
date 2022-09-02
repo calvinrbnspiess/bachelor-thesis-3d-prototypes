@@ -1,0 +1,22 @@
+@use "../01-settings/variables" as *;
+@use "../01-settings/helpers" as *;
+@use "../03-elements/section" as *;
+
+.grid {
+  display: grid;
+  gap: remcalc(120);
+
+  align-items: center;
+
+  @media (min-width: $min-xxl) {
+    &--50-50 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &__column {
+    position: relative;
+    height: 100%;
+  }
+
+}

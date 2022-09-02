@@ -1,0 +1,57 @@
+
+%icon-pseudo {
+  display: block;
+
+  height: var(--size-icon);
+  width: var(--size-icon);
+  min-width: remcalc(15);
+
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+
+  background-color: var(--color-icon, var(--color-text));
+}
+
+.icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  svg {
+    height: var(--size-icon);
+    width: auto;
+    margin-right: remcalc(5);
+  }
+
+  &:before {
+    @extend %icon-pseudo;
+  }
+
+  &--right {
+    &:before {
+      order: 1;
+    }
+  }
+
+  &:not(.icon--right):not(:empty):before {
+    margin-right: var(--margin-icon);
+  }
+
+  &.icon--right:not(:empty):before {
+    margin-left: var(--margin-icon);
+  }
+
+  &:after {
+    margin-right: 0;
+    margin-left: remcalc(10);
+  }
+
+  &--shopping-cart {
+    &:before {
+      content: "";
+      mask-image: url(../../public/icons/shopping-cart.svg);
+    }
+  }
+
+}

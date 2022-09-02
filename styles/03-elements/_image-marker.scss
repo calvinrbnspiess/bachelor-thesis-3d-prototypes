@@ -1,0 +1,75 @@
+@use "../01-settings/variables" as *;
+@use "../01-settings/helpers" as *;
+
+
+.image-marker {
+
+  --size-marker: #{remcalc(30)};
+
+  position: absolute;
+  top: var(--position-y, unset);
+  left: var(--position-x, unset);
+
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: center;
+
+  &__label {
+    position: absolute;
+    z-index: 1;
+
+    padding: remcalc(15) remcalc(40);
+    border-radius: remcalc(25);
+    background:  linear-gradient(180deg, #1A1E24 0%, #14171C 100%);
+
+    display: block;
+
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+    color: var(--color-white);
+
+    white-space: nowrap;
+
+    user-select: none;
+
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: all var(--transition-default);
+
+    @media (max-width: $xl) {
+      top: calc(100% + #{remcalc(5)});
+    }
+
+    @media (min-width: $min-xxl) {
+      right: calc(100% + #{remcalc(20)});
+    }
+
+  }
+
+  &__indicator {
+    content: url(../../public/icons/marker.svg);
+
+    transition: transform var(--transition-default);
+    cursor: pointer;
+
+    width: var(--size-marker);
+    height: var(--size-marker);
+
+    &:hover {
+      transform: rotate(180deg);
+    }
+  }
+
+
+  &--visible, &:hover {
+    .image-marker__label {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+
+}

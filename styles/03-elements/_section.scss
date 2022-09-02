@@ -1,0 +1,41 @@
+@use "../01-settings/helpers" as *;
+
+%section {
+  max-width: var(--max-width-content);
+
+  margin: 0 auto;
+  padding: remcalc(75) var(--padding-horizontal-page);
+}
+
+.section {
+
+  &__container {
+    @extend %section;
+  }
+
+  &__headline {
+    font-size: remcalc(22);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+
+    color: var(--color-white);
+    margin-bottom: var(--gap-default);
+  }
+
+  &--stretched {
+    max-width: var(--max-width-stretched);
+  }
+
+  &--solid {
+    width: 100%;
+
+    background: var(--gradient-solid-section);
+
+    .section__container, &.section__container {
+      padding: remcalc(75) var(--padding-horizontal-page);
+    }
+  }
+
+
+}
