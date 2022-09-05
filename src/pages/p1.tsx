@@ -5,20 +5,160 @@ import * as css from "../../styles/06-prototypes/p1.module.scss";
 import { getPrototypeStylesheet } from "../helpers/styles";
 import content from "../content";
 import { ModelViewer } from "../components/model-viewer/3DViewer";
+import {
+  ProductConfigurator,
+  ProductView,
+} from "../components/ProductConfigurator";
+import { Model } from "@google/model-viewer/lib/features/scene-graph/model";
+import { Color } from "three/src/math/Color";
+import { useCallback, useRef, useState } from "react";
+import { ModelViewerElement } from "@google/model-viewer/src/model-viewer";
 
-export const Configurator3DViewer = ({ ...props }) => (
-  <div
-    className={classnames(
-      "product-configurator",
-      "product-configurator__container"
-    )}
-  >
+const toRGBA = (hex: string): [r: number, g: number, b: number, a: number] => {
+  let color: [r: number, g: number, b: number] = new Color(
+    hex
+  ).toArray() as any;
+  return [...color, 1];
+};
+
+const restoreMetalMaterials = (
+  modelViewer: ModelViewerElement,
+  materialNames: string[] = []
+) => {
+  modelViewer.model?.materials
+    .filter((material) => materialNames.includes(material.name))
+    .forEach((material) => {
+      material.pbrMetallicRoughness.setRoughnessFactor(0.2);
+    });
+};
+
+type MaterialReplacement = {
+  name: string;
+  color: string;
+};
+
+type ProductViewWithMaterialReplacements = ProductView & {
+  materials: MaterialReplacement[];
+};
+
+export const Configurator3DViewer = ({ ...props }) => {
+  const modelViewerRef = useRef<ModelViewerElement | null>(null);
+
+  let onProductClick = useCallback(
+    (view: ProductViewWithMaterialReplacements) => {
+      if (!modelViewerRef.current) {
+        return;
+      }
+
+      let model = modelViewerRef.current.model!;
+
+      for (let materialReplacement of view.materials) {
+        let material = model.materials.find(
+          (material) => material.name === materialReplacement.name
+        );
+
+        console.log(material?.name);
+
+        if (!material) {
+          continue;
+        }
+
+        material.pbrMetallicRoughness.setBaseColorFactor(
+          toRGBA(materialReplacement.color)
+        );
+      }
+    },
+    [modelViewerRef]
+  );
+
+  let renderView = ({}) => (
     <ModelViewer
-      src="Rendering_Motorcycle_DarkBlue_optimized_model-viewer.glb"
+      src="Rendering_Motorcycle_Anthracite.glb"
+      onInitialization={(modelViewer) => {
+        if (!modelViewer.model) {
+          return;
+        }
+
+        modelViewerRef.current = modelViewer;
+        onProductClick(views[0]);
+        restoreMetalMaterials(modelViewer, ["metall glossy", "gray"]);
+      }}
       {...props}
     ></ModelViewer>
-  </div>
-);
+  );
+
+  let views: ProductViewWithMaterialReplacements[] = [
+    {
+      name: "dunkel-rot",
+      color: "#E2001A",
+      materials: [
+        {
+          name: "decal",
+          color: "#FF4453",
+        },
+        {
+          name: "carpaint",
+          color: "#820409",
+        },
+      ],
+      renderProductView: renderView,
+    },
+    {
+      name: "karamell-weiß",
+      color: "#FFFFFF",
+      materials: [
+        {
+          name: "decal",
+          color: "#FFF3F9",
+        },
+        {
+          name: "carpaint",
+          color: "#74675A",
+        },
+      ],
+      renderProductView: renderView,
+    },
+    {
+      name: "neon-grün",
+      color: "#5ABF16",
+      materials: [
+        {
+          name: "decal",
+          color: "#81DD93",
+        },
+        {
+          name: "carpaint",
+          color: "#176A26",
+        },
+      ],
+      renderProductView: renderView,
+    },
+    {
+      name: "anthrazit",
+      color: "#1D212B",
+      materials: [
+        {
+          name: "decal",
+          color: "#09091F",
+        },
+        {
+          name: "carpaint",
+          color: "#040314",
+        },
+      ],
+      renderProductView: renderView,
+    },
+  ];
+
+  return (
+    <ProductConfigurator
+      views={views as ProductView[]}
+      onProductClick={(view) =>
+        onProductClick(view as ProductViewWithMaterialReplacements)
+      }
+    />
+  );
+};
 
 export const Annotations3DViewerHotspots = () => (
   <>
@@ -73,10 +213,7 @@ export const Annotations3DViewer = ({ ...props }) => (
       "annotation-graphic__container"
     )}
   >
-    <ModelViewer
-      src="Rendering_Motorcycle_DarkBlue_optimized_model-viewer.glb"
-      {...props}
-    >
+    <ModelViewer src="Rendering_Motorcycle_Anthracite.glb" {...props}>
       <Annotations3DViewerHotspots />
     </ModelViewer>
   </div>
@@ -87,21 +224,14 @@ const Prototype: NextPage = () => {
     <PrototypePage
       id={"P1"}
       className={getPrototypeStylesheet(css)}
-      heroMediaSlot={
-        <img src={"motorcycle-01-09-render4-1512-dark-blue.png"} />
-      }
+      heroMediaSlot={<img src={content.renderImage} />}
       configuratorSlot={
-        <Configurator3DViewer
-          exposure="0.15"
-          data-js-focus-visible
-          auto-rotate
-        />
+        <Configurator3DViewer camera-controls data-js-focus-visible />
       }
       annotationsSlot={
         <Annotations3DViewer
           camera-orbit="70deg 60deg 2.75m"
-          exposure="0.15"
-          auto-rotate
+          camera-controls
           data-js-focus-visible
         />
       }

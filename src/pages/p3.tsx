@@ -12,7 +12,6 @@ const Prototype: NextPage = () => {
       className={getPrototypeStylesheet(css)}
       heroMediaSlot={
         <Hero3DViewer
-          exposure="0.15"
           data-js-focus-visible
           camera-controls
           camera-target={"-1.25m auto auto"}
@@ -21,16 +20,11 @@ const Prototype: NextPage = () => {
         />
       }
       configuratorSlot={
-        <Configurator3DViewer
-          exposure="0.15"
-          data-js-focus-visible
-          camera-controls
-        />
+        <Configurator3DViewer data-js-focus-visible camera-controls />
       }
       annotationsSlot={
         <Annotations3DViewer
           camera-orbit="70deg 60deg 2.75m"
-          exposure="0.15"
           camera-controls
           data-js-focus-visible
         />

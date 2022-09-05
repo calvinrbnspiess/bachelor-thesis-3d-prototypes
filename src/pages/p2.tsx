@@ -21,20 +21,13 @@ const Prototype: NextPage = () => {
     <PrototypePage
       id={"P2"}
       className={getPrototypeStylesheet(css)}
-      heroMediaSlot={
-        <Hero3DViewer exposure="0.15" data-js-focus-visible camera-controls />
-      }
+      heroMediaSlot={<Hero3DViewer data-js-focus-visible camera-controls />}
       configuratorSlot={
-        <Configurator3DViewer
-          exposure="0.15"
-          data-js-focus-visible
-          camera-controls
-        />
+        <Configurator3DViewer data-js-focus-visible camera-controls />
       }
       annotationsSlot={
         <Annotations3DViewer
           camera-orbit="70deg 60deg 2.75m"
-          exposure="0.15"
           camera-controls
           data-js-focus-visible
         />

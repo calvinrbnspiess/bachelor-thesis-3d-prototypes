@@ -1,6 +1,6 @@
 @use "../01-settings/variables" as *;
 @use "../01-settings/helpers" as *;
-
+@use "label" as *;
 
 .image-marker {
 
@@ -19,21 +19,7 @@
     position: absolute;
     z-index: 1;
 
-    padding: remcalc(15) remcalc(40);
-    border-radius: remcalc(25);
-    background:  linear-gradient(180deg, #1A1E24 0%, #14171C 100%);
-
-    display: block;
-
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    text-align: center;
-    color: var(--color-white);
-
-    white-space: nowrap;
-
-    user-select: none;
+    @extend .label;
 
     opacity: 0;
     transform: scaleX(0);

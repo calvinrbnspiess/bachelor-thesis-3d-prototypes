@@ -148,60 +148,7 @@ const PrototypePage = (props: PrototypePageProps) => {
             "section--configurator"
           )}
         >
-          <div className={classnames("grid", "grid--50-50")}>
-            <div className={classnames("grid__column")}>
-              <h2 className={classnames("section__headline")}>
-                Die passende Farbe parat
-              </h2>
-              <p>
-                Vier spannende Farbvarianten garantieren dir deine ganz
-                individuelle Z900. Somit ist dein neues Motorrad ganz nach
-                deinem Geschmack.
-              </p>
-              <div
-                className={classnames(
-                  "color-picker",
-                  "color-picker__container"
-                )}
-              >
-                <span
-                  className={classnames("color-picker__item")}
-                  style={
-                    {
-                      "--color": "#E2001A",
-                    } as CSSProperties
-                  }
-                />
-                <span
-                  className={classnames("color-picker__item")}
-                  style={
-                    {
-                      "--color": "#FFFFFF",
-                    } as CSSProperties
-                  }
-                />
-                <span
-                  className={classnames("color-picker__item")}
-                  style={
-                    {
-                      "--color": "#5ABF16",
-                    } as CSSProperties
-                  }
-                />
-                <span
-                  className={classnames("color-picker__item")}
-                  style={
-                    {
-                      "--color": "#1D212B",
-                    } as CSSProperties
-                  }
-                />
-              </div>
-            </div>
-            <div className={classnames("grid__column")}>
-              {props.configuratorSlot}
-            </div>
-          </div>
+          {props.configuratorSlot}
         </section>
         <section
           className={classnames(

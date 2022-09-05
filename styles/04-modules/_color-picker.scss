@@ -18,6 +18,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     &:after {
       content: "";
@@ -29,7 +30,7 @@
       transform: scale(0.85);
     }
 
-    &--active {
+    &--active, &:hover {
       border: remcalc(2) solid var(--color-white)
     }
   }
