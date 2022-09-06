@@ -15,9 +15,9 @@ import { useCallback, useRef, useState } from "react";
 import { ModelViewerElement } from "@google/model-viewer/src/model-viewer";
 
 const toRGBA = (hex: string): [r: number, g: number, b: number, a: number] => {
-  let color: [r: number, g: number, b: number] = new Color(
-    hex
-  ).toArray() as any;
+  let color: [r: number, g: number, b: number] = new Color(hex)
+    .convertSRGBToLinear()
+    .toArray() as any;
   return [...color, 1];
 };
 
@@ -66,6 +66,7 @@ export const Configurator3DViewer = ({ ...props }) => {
         material.pbrMetallicRoughness.setBaseColorFactor(
           toRGBA(materialReplacement.color)
         );
+        console.log(material.pbrMetallicRoughness.roughnessFactor);
       }
     },
     [modelViewerRef]
@@ -73,7 +74,7 @@ export const Configurator3DViewer = ({ ...props }) => {
 
   let renderView = ({}) => (
     <ModelViewer
-      src="Rendering_Motorcycle_Anthracite.glb"
+      src="Rendering_Motorcycle_Anthracite_GLB.glb"
       onInitialization={(modelViewer) => {
         if (!modelViewer.model) {
           return;
@@ -83,41 +84,13 @@ export const Configurator3DViewer = ({ ...props }) => {
         onProductClick(views[0]);
         restoreMetalMaterials(modelViewer, ["metall glossy", "gray"]);
       }}
+      auto-rotate
+      camera-orbit="240deg 90deg 2.5m"
       {...props}
     ></ModelViewer>
   );
 
   let views: ProductViewWithMaterialReplacements[] = [
-    {
-      name: "dunkel-rot",
-      color: "#E2001A",
-      materials: [
-        {
-          name: "decal",
-          color: "#FF4453",
-        },
-        {
-          name: "carpaint",
-          color: "#820409",
-        },
-      ],
-      renderProductView: renderView,
-    },
-    {
-      name: "karamell-weiß",
-      color: "#FFFFFF",
-      materials: [
-        {
-          name: "decal",
-          color: "#FFF3F9",
-        },
-        {
-          name: "carpaint",
-          color: "#74675A",
-        },
-      ],
-      renderProductView: renderView,
-    },
     {
       name: "neon-grün",
       color: "#5ABF16",
@@ -134,6 +107,21 @@ export const Configurator3DViewer = ({ ...props }) => {
       renderProductView: renderView,
     },
     {
+      name: "dunkel-rot",
+      color: "#E2001A",
+      materials: [
+        {
+          name: "decal",
+          color: "#FF4453",
+        },
+        {
+          name: "carpaint",
+          color: "#820409",
+        },
+      ],
+      renderProductView: renderView,
+    },
+    {
       name: "anthrazit",
       color: "#1D212B",
       materials: [
@@ -144,6 +132,21 @@ export const Configurator3DViewer = ({ ...props }) => {
         {
           name: "carpaint",
           color: "#040314",
+        },
+      ],
+      renderProductView: renderView,
+    },
+    {
+      name: "karamell-weiß",
+      color: "#74675A",
+      materials: [
+        {
+          name: "decal",
+          color: "#FFF3F9",
+        },
+        {
+          name: "carpaint",
+          color: "#74675A",
         },
       ],
       renderProductView: renderView,
@@ -213,7 +216,7 @@ export const Annotations3DViewer = ({ ...props }) => (
       "annotation-graphic__container"
     )}
   >
-    <ModelViewer src="Rendering_Motorcycle_Anthracite.glb" {...props}>
+    <ModelViewer src="Rendering_Motorcycle_Anthracite_GLB.glb" {...props}>
       <Annotations3DViewerHotspots />
     </ModelViewer>
   </div>
