@@ -76,30 +76,34 @@ const PrototypePage = (props: PrototypePageProps) => {
             />
           </Link>
         </nav>
-        <section className={classnames("hero", "hero__container")}>
-          <h1 className={classnames("hero__headline")}>
-            Kawasaki
-            <strong>Z900</strong>
-            <span className={classnames("hero__headline-shade")}>2017</span>
-          </h1>
-          <div className={classnames("hero__media")}>{props.heroMediaSlot}</div>
-          <p className={classnames("hero__content")}>
-            Die neue Z900 besitzt einen 948-cm3-Reihenvierzylindermotor in einem
-            völlig neuen, ultraleichten Rahmen und wurde für maximalen Fahrspaß
-            konstruiert. Jede Bewegung am Gasgriff wird mit einer knackigen und
-            zugleich ausgewogenen Gasannahme sowie einer aufregenden
-            Beschleunigung honoriert.
-            <button
-              className={classnames(
-                "button",
-                "icon",
-                "icon--right",
-                "icon--shopping-cart"
-              )}
-            >
-              Jetzt Bestellen
-            </button>
-          </p>
+        <section className={classnames("hero")}>
+          <div className={classnames("hero__container")}>
+            <h1 className={classnames("hero__headline")}>
+              Kawasaki
+              <strong>Z900</strong>
+              <span className={classnames("hero__headline-shade")}>2017</span>
+            </h1>
+            <div className={classnames("hero__media")}>
+              {props.heroMediaSlot}
+            </div>
+            <p className={classnames("hero__content")}>
+              Die neue Z900 besitzt einen 948-cm3-Reihenvierzylindermotor in
+              einem völlig neuen, ultraleichten Rahmen und wurde für maximalen
+              Fahrspaß konstruiert. Jede Bewegung am Gasgriff wird mit einer
+              knackigen und zugleich ausgewogenen Gasannahme sowie einer
+              aufregenden Beschleunigung honoriert.
+              <button
+                className={classnames(
+                  "button",
+                  "icon",
+                  "icon--right",
+                  "icon--shopping-cart"
+                )}
+              >
+                Jetzt Bestellen
+              </button>
+            </p>
+          </div>
         </section>
         <section
           className={classnames("section", "section--solid", "section--kpi")}

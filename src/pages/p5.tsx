@@ -14,16 +14,36 @@ const Prototype: NextPage = () => {
       heroMediaSlot={
         <ModelViewer
           src="Rendering_Motorcycle_Anthracite_GLB.glb"
-          camera-orbit="-70deg 10deg 2.75m"
+          camera-orbit="230deg 75deg 105%"
           onInitialization={(modelViewer) => {
             console.log("init p5 hero");
-            document.body.addEventListener("scroll", () => {
-              console.log(window.scrollY);
-              modelViewer.cameraOrbit = `${Math.max(
-                -70 + -0.15 * document.body.scrollTop,
-                10
-              )}deg ${0.15 * document.body.scrollTop}deg 2.75m`;
-            });
+
+            let updateCameraOrbit = () => {
+              let scrollPercentage =
+                document.body.scrollTop / document.body.scrollHeight;
+
+              console.log(scrollPercentage);
+
+              let theta = Math.max(
+                180,
+                Math.min(230 + 360 * 0.5 * scrollPercentage, 270)
+              );
+
+              let phi = Math.max(
+                60,
+                Math.min(75 - 360 * 0.25 * scrollPercentage, 85)
+              );
+
+              let orbit = `${theta}deg ${phi}deg 105%`;
+
+              console.log(orbit);
+
+              modelViewer.cameraOrbit = orbit;
+            };
+
+            document.body.addEventListener("scroll", updateCameraOrbit);
+
+            updateCameraOrbit();
           }}
         ></ModelViewer>
       }
