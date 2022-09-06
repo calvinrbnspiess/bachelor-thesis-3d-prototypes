@@ -1,7 +1,7 @@
 @use "../01-settings/helpers" as *;
 @use "../03-elements/section" as *;
 
-.prototype :global {
+.prototype :global, %prototype-2 {
 
   .section--configurator.section__container {
     max-width: unset;

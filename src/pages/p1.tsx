@@ -41,7 +41,10 @@ type ProductViewWithMaterialReplacements = ProductView & {
   materials: MaterialReplacement[];
 };
 
-export const Configurator3DViewer = ({ ...props }) => {
+export const Configurator3DViewer = ({
+  disableEnhancements = false,
+  ...props
+}) => {
   const modelViewerRef = useRef<ModelViewerElement | null>(null);
 
   let onProductClick = useCallback(
@@ -57,16 +60,15 @@ export const Configurator3DViewer = ({ ...props }) => {
           (material) => material.name === materialReplacement.name
         );
 
-        console.log(material?.name);
-
         if (!material) {
           continue;
         }
 
-        material.pbrMetallicRoughness.setBaseColorFactor(
-          toRGBA(materialReplacement.color)
-        );
-        console.log(material.pbrMetallicRoughness.roughnessFactor);
+        if (!disableEnhancements) {
+          material.pbrMetallicRoughness.setBaseColorFactor(
+            toRGBA(materialReplacement.color)
+          );
+        }
       }
     },
     [modelViewerRef]
