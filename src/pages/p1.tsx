@@ -21,17 +21,6 @@ const toRGBA = (hex: string): [r: number, g: number, b: number, a: number] => {
   return [...color, 1];
 };
 
-const restoreMetalMaterials = (
-  modelViewer: ModelViewerElement,
-  materialNames: string[] = []
-) => {
-  modelViewer.model?.materials
-    .filter((material) => materialNames.includes(material.name))
-    .forEach((material) => {
-      material.pbrMetallicRoughness.setRoughnessFactor(0.2);
-    });
-};
-
 type MaterialReplacement = {
   name: string;
   color: string;
@@ -41,10 +30,7 @@ type ProductViewWithMaterialReplacements = ProductView & {
   materials: MaterialReplacement[];
 };
 
-export const Configurator3DViewer = ({
-  disableEnhancements = false,
-  ...props
-}) => {
+export const Configurator3DViewer = ({ ...props }) => {
   const modelViewerRef = useRef<ModelViewerElement | null>(null);
 
   let onProductClick = useCallback(
@@ -64,11 +50,9 @@ export const Configurator3DViewer = ({
           continue;
         }
 
-        if (!disableEnhancements) {
-          material.pbrMetallicRoughness.setBaseColorFactor(
-            toRGBA(materialReplacement.color)
-          );
-        }
+        material.pbrMetallicRoughness.setBaseColorFactor(
+          toRGBA(materialReplacement.color)
+        );
       }
     },
     [modelViewerRef]
@@ -84,7 +68,6 @@ export const Configurator3DViewer = ({
 
         modelViewerRef.current = modelViewer;
         onProductClick(views[0]);
-        restoreMetalMaterials(modelViewer, ["metall glossy", "gray"]);
       }}
       auto-rotate
       camera-orbit="240deg 90deg 2.5m"

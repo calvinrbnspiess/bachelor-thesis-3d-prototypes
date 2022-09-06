@@ -1,0 +1,19 @@
+@use "../01-settings/helpers" as *;
+@use "../03-elements/section" as *;
+@use "p2.module" as *;
+
+.prototype :global {
+
+  @extend %prototype-2;
+
+  .hero {
+    &__media {
+      width: 100%;
+    }
+
+    &__media model-viewer {
+      height: 100%;
+    }
+  }
+
+}
