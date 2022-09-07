@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import { CSSProperties, ReactNode, useState } from "react";
+import { CSSProperties, ReactNode, useEffect, useState } from "react";
 
 export type ProductView = {
   name: string;
@@ -14,6 +14,14 @@ export const ProductConfigurator = (props: {
 }) => {
   const { views, defaultView, onProductClick = () => {} } = props;
   const [productView, setProductView] = useState(views[defaultView || 0]);
+
+  useEffect(() => {
+    if (isNaN(defaultView!)) {
+      return;
+    }
+
+    setProductView(views[defaultView!]);
+  }, [defaultView]);
 
   return (
     <div

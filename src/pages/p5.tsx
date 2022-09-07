@@ -1,61 +1,80 @@
 import type { NextPage } from "next";
 import PrototypePage from "../components/PrototypePage";
-import * as css from "../../styles/06-prototypes/p5.module.scss";
+import * as css from "../../styles/06-prototypes/p2.module.scss";
 import { getPrototypeStylesheet } from "../helpers/styles";
-import { Annotations3DViewer, Configurator3DViewer } from "./p1";
+import {
+  changeProductMaterials,
+  Configurator3DViewer,
+  getProductViews,
+  toRGBA,
+} from "./p1";
 import content from "../content";
-import { ModelViewer } from "../components/model-viewer/3DViewer";
+import { ModelViewerElement } from "@google/model-viewer/src/model-viewer";
+import { useState } from "react";
+import { AnnotationsGraphic } from "../components/AnnotationsGraphic";
+import { markers } from "./pv";
 
 const Prototype: NextPage = () => {
+  const [productConfiguratorView, setProductConfiguratorView] =
+    useState<number>(0);
+
   return (
     <PrototypePage
-      id={"P5"}
+      id={"P2"}
       className={getPrototypeStylesheet(css)}
-      heroMediaSlot={
-        <ModelViewer
-          src="Rendering_Motorcycle_Anthracite_GLB.glb"
-          camera-orbit="230deg 75deg 105%"
-          onInitialization={(modelViewer) => {
-            console.log("init p5 hero");
-
-            let updateCameraOrbit = () => {
-              let scrollPercentage =
-                document.body.scrollTop / document.body.scrollHeight;
-
-              console.log(scrollPercentage);
-
-              let theta = Math.max(
-                180,
-                Math.min(230 + 360 * 0.5 * scrollPercentage, 270)
-              );
-
-              let phi = Math.max(
-                60,
-                Math.min(75 - 360 * 0.25 * scrollPercentage, 85)
-              );
-
-              let orbit = `${theta}deg ${phi}deg 105%`;
-
-              console.log(orbit);
-
-              modelViewer.cameraOrbit = orbit;
-            };
-
-            document.body.addEventListener("scroll", updateCameraOrbit);
-
-            updateCameraOrbit();
-          }}
-        ></ModelViewer>
-      }
+      heroMediaSlot={<img src={content.renderImage} />}
       configuratorSlot={
-        <Configurator3DViewer camera-controls data-js-focus-visible />
+        <Configurator3DViewer
+          camera-controls
+          autoRotate={false}
+          data-js-focus-visible
+          interaction-prompt={"none"}
+          autoplay
+          src={"Rendering_Motorcycle_Anthracite_PIPETTE_GLB.glb"}
+          defaultView={productConfiguratorView}
+          onInitialization={(modelViewer: ModelViewerElement) => {
+            modelViewer.addEventListener("click", (event) => {
+              const material = modelViewer.materialFromPoint(
+                event.clientX,
+                event.clientY
+              );
+
+              if (material && material.name.startsWith("pipette-color")) {
+                let originalColor =
+                  material?.pbrMetallicRoughness.baseColorFactor;
+                material?.pbrMetallicRoughness.setBaseColorFactor(
+                  toRGBA("#ffffff")
+                );
+
+                setTimeout(() => {
+                  material?.pbrMetallicRoughness.setBaseColorFactor(
+                    originalColor
+                  );
+                }, 240);
+
+                let productViews = getProductViews();
+                let view =
+                  productViews.find((view) => {
+                    return (
+                      view.name ===
+                      material.name
+                        .replace("pipette-color", "")
+                        .replace("-", "")
+                    );
+                  }) || productViews[0];
+
+                changeProductMaterials(modelViewer, view || productViews[0]);
+                setProductConfiguratorView(productViews.indexOf(view));
+              }
+            });
+          }}
+        />
       }
       annotationsSlot={
-        <Annotations3DViewer
-          camera-orbit="70deg 60deg 2.75m"
-          camera-controls
-          data-js-focus-visible
-        />
+        <AnnotationsGraphic
+          src={content.renderImage}
+          markers={markers}
+        ></AnnotationsGraphic>
       }
     />
   );

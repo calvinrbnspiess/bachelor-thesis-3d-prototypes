@@ -13,7 +13,9 @@ import { Color } from "three/src/math/Color";
 import { ReactNode, Ref, useCallback, useRef, useState } from "react";
 import { ModelViewerElement } from "@google/model-viewer/src/model-viewer";
 
-const toRGBA = (hex: string): [r: number, g: number, b: number, a: number] => {
+export const toRGBA = (
+  hex: string
+): [r: number, g: number, b: number, a: number] => {
   let color: [r: number, g: number, b: number] = new Color(hex)
     .convertSRGBToLinear()
     .toArray() as any;
@@ -119,7 +121,13 @@ export const changeProductMaterials = (
   }
 };
 
-export const Configurator3DViewer = ({ ...props }) => {
+export const Configurator3DViewer = ({
+  defaultView,
+  ...props
+}: {
+  defaultView?: number;
+  [key: string]: any;
+}) => {
   const modelViewerRef = useRef<ModelViewerElement | null>(null);
 
   let renderView = () => (
@@ -133,7 +141,6 @@ export const Configurator3DViewer = ({ ...props }) => {
         modelViewerRef.current = modelViewer;
         changeProductMaterials(modelViewerRef.current, views[0]);
       }}
-      auto-rotate
       camera-orbit="240deg 90deg 2.5m"
       {...props}
     ></ModelViewer>
@@ -150,6 +157,7 @@ export const Configurator3DViewer = ({ ...props }) => {
           view as ProductViewWithMaterialReplacements
         )
       }
+      defaultView={defaultView}
     />
   );
 };

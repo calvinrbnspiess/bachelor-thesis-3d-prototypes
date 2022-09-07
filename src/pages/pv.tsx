@@ -6,6 +6,29 @@ import { AnnotationsGraphic } from "../components/AnnotationsGraphic";
 import content from "../content";
 import { ProductConfigurator } from "../components/ProductConfigurator";
 
+export const markers = [
+  {
+    label: content.markers.tachometer,
+    x: 0.41,
+    y: 0.25,
+  },
+  {
+    label: content.markers.lights,
+    x: 0.24,
+    y: 0.38,
+  },
+  {
+    label: content.markers.capacity,
+    x: 0.58,
+    y: 0.655,
+  },
+  {
+    label: content.markers.indicators,
+    x: 0.94,
+    y: 0.425,
+  },
+];
+
 const Prototype: NextPage = () => {
   return (
     <PrototypePage
@@ -69,28 +92,7 @@ const Prototype: NextPage = () => {
       annotationsSlot={
         <AnnotationsGraphic
           src={content.renderImage}
-          markers={[
-            {
-              label: content.markers.tachometer,
-              x: 0.41,
-              y: 0.25,
-            },
-            {
-              label: content.markers.lights,
-              x: 0.24,
-              y: 0.38,
-            },
-            {
-              label: content.markers.capacity,
-              x: 0.58,
-              y: 0.655,
-            },
-            {
-              label: content.markers.indicators,
-              x: 0.94,
-              y: 0.425,
-            },
-          ]}
+          markers={markers}
         ></AnnotationsGraphic>
       }
     />
