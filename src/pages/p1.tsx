@@ -9,9 +9,8 @@ import {
   ProductConfigurator,
   ProductView,
 } from "../components/ProductConfigurator";
-import { Model } from "@google/model-viewer/lib/features/scene-graph/model";
 import { Color } from "three/src/math/Color";
-import { useCallback, useRef, useState } from "react";
+import { ReactNode, Ref, useCallback, useRef, useState } from "react";
 import { ModelViewerElement } from "@google/model-viewer/src/model-viewer";
 
 const toRGBA = (hex: string): [r: number, g: number, b: number, a: number] => {
@@ -21,44 +20,109 @@ const toRGBA = (hex: string): [r: number, g: number, b: number, a: number] => {
   return [...color, 1];
 };
 
-type MaterialReplacement = {
+export type MaterialReplacement = {
   name: string;
   color: string;
 };
 
-type ProductViewWithMaterialReplacements = ProductView & {
+export type ProductViewWithMaterialReplacements = ProductView & {
   materials: MaterialReplacement[];
+};
+
+export const getProductViews = (
+  renderFunction = () => <></>
+): ProductViewWithMaterialReplacements[] => [
+  {
+    name: "neon-grün",
+    color: "#5ABF16",
+    materials: [
+      {
+        name: "decal",
+        color: "#81DD93",
+      },
+      {
+        name: "carpaint",
+        color: "#176A26",
+      },
+    ],
+    renderProductView: renderFunction,
+  },
+  {
+    name: "dunkel-rot",
+    color: "#E2001A",
+    materials: [
+      {
+        name: "decal",
+        color: "#FF4453",
+      },
+      {
+        name: "carpaint",
+        color: "#820409",
+      },
+    ],
+    renderProductView: renderFunction,
+  },
+  {
+    name: "anthrazit",
+    color: "#1D212B",
+    materials: [
+      {
+        name: "decal",
+        color: "#09091F",
+      },
+      {
+        name: "carpaint",
+        color: "#040314",
+      },
+    ],
+    renderProductView: renderFunction,
+  },
+  {
+    name: "karamell-weiß",
+    color: "#74675A",
+    materials: [
+      {
+        name: "decal",
+        color: "#FFF3F9",
+      },
+      {
+        name: "carpaint",
+        color: "#74675A",
+      },
+    ],
+    renderProductView: renderFunction,
+  },
+];
+
+export const changeProductMaterials = (
+  modelViewer: ModelViewerElement | null,
+  view: ProductViewWithMaterialReplacements
+) => {
+  if (!modelViewer) {
+    return;
+  }
+
+  let model = modelViewer.model!;
+
+  for (let materialReplacement of view.materials) {
+    let material = model.materials.find(
+      (material) => material.name === materialReplacement.name
+    );
+
+    if (!material) {
+      continue;
+    }
+
+    material.pbrMetallicRoughness.setBaseColorFactor(
+      toRGBA(materialReplacement.color)
+    );
+  }
 };
 
 export const Configurator3DViewer = ({ ...props }) => {
   const modelViewerRef = useRef<ModelViewerElement | null>(null);
 
-  let onProductClick = useCallback(
-    (view: ProductViewWithMaterialReplacements) => {
-      if (!modelViewerRef.current) {
-        return;
-      }
-
-      let model = modelViewerRef.current.model!;
-
-      for (let materialReplacement of view.materials) {
-        let material = model.materials.find(
-          (material) => material.name === materialReplacement.name
-        );
-
-        if (!material) {
-          continue;
-        }
-
-        material.pbrMetallicRoughness.setBaseColorFactor(
-          toRGBA(materialReplacement.color)
-        );
-      }
-    },
-    [modelViewerRef]
-  );
-
-  let renderView = ({}) => (
+  let renderView = () => (
     <ModelViewer
       src="Rendering_Motorcycle_Anthracite_GLB.glb"
       onInitialization={(modelViewer) => {
@@ -67,7 +131,7 @@ export const Configurator3DViewer = ({ ...props }) => {
         }
 
         modelViewerRef.current = modelViewer;
-        onProductClick(views[0]);
+        changeProductMaterials(modelViewerRef.current, views[0]);
       }}
       auto-rotate
       camera-orbit="240deg 90deg 2.5m"
@@ -75,80 +139,25 @@ export const Configurator3DViewer = ({ ...props }) => {
     ></ModelViewer>
   );
 
-  let views: ProductViewWithMaterialReplacements[] = [
-    {
-      name: "neon-grün",
-      color: "#5ABF16",
-      materials: [
-        {
-          name: "decal",
-          color: "#81DD93",
-        },
-        {
-          name: "carpaint",
-          color: "#176A26",
-        },
-      ],
-      renderProductView: renderView,
-    },
-    {
-      name: "dunkel-rot",
-      color: "#E2001A",
-      materials: [
-        {
-          name: "decal",
-          color: "#FF4453",
-        },
-        {
-          name: "carpaint",
-          color: "#820409",
-        },
-      ],
-      renderProductView: renderView,
-    },
-    {
-      name: "anthrazit",
-      color: "#1D212B",
-      materials: [
-        {
-          name: "decal",
-          color: "#09091F",
-        },
-        {
-          name: "carpaint",
-          color: "#040314",
-        },
-      ],
-      renderProductView: renderView,
-    },
-    {
-      name: "karamell-weiß",
-      color: "#74675A",
-      materials: [
-        {
-          name: "decal",
-          color: "#FFF3F9",
-        },
-        {
-          name: "carpaint",
-          color: "#74675A",
-        },
-      ],
-      renderProductView: renderView,
-    },
-  ];
+  let views = getProductViews(renderView);
 
   return (
     <ProductConfigurator
       views={views as ProductView[]}
       onProductClick={(view) =>
-        onProductClick(view as ProductViewWithMaterialReplacements)
+        changeProductMaterials(
+          modelViewerRef.current,
+          view as ProductViewWithMaterialReplacements
+        )
       }
     />
   );
 };
 
-export const Annotations3DViewerHotspots = () => (
+export const Annotations3DViewerHotspots = ({
+  visibility = true,
+  largeMarkers = false,
+}) => (
   <>
     {[
       {
@@ -179,7 +188,11 @@ export const Annotations3DViewerHotspots = () => (
       },
     ].map((hotspot) => (
       <button
-        className={classnames("image-marker")}
+        className={classnames(
+          "image-marker",
+          !visibility && "image-marker--hidden",
+          largeMarkers && "image-marker--large"
+        )}
         slot={`hotspot-${hotspot.label}`}
         data-position={hotspot.position}
         data-normal={hotspot.normal}

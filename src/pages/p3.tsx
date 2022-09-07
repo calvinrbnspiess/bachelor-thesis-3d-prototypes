@@ -26,6 +26,7 @@ const Prototype: NextPage = () => {
           camera-orbit="70deg 60deg 2.75m"
           camera-controls
           data-js-focus-visible
+          disableEnhancements
           src={model}
         />
       }

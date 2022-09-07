@@ -15,7 +15,7 @@ type ImageMarkerProps = {
 };
 
 const ImageMarker = ({ label, x, y }: ImageMarkerProps) => {
-  const [isVisible, setVisible] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
   let style = {
     "--position-x": x + "px",
@@ -24,10 +24,7 @@ const ImageMarker = ({ label, x, y }: ImageMarkerProps) => {
 
   return (
     <div
-      className={classnames(
-        "image-marker",
-        isVisible && "image-marker--visible"
-      )}
+      className={classnames("image-marker", isOpen && "image-marker--open")}
       style={style}
     >
       <label className={"image-marker__label"}>{label}</label>

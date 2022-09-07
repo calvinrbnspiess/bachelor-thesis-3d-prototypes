@@ -57,11 +57,6 @@ const Home: NextPage = () => {
                 <a>Prototyp 5</a>
               </Link>
             </li>
-            <li>
-              <Link href={"p6"}>
-                <a>Prototyp 6</a>
-              </Link>
-            </li>
           </ul>
         </section>
       </main>
