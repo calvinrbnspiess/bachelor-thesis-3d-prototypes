@@ -9,7 +9,7 @@
   position: absolute;
   top: var(--position-y, unset);
   left: var(--position-x, unset);
-  transform: translate(-50%, -50%);
+  transform: scale(1) translate(-50%, -50%);
 
   display: flex;
   align-items: center;
@@ -55,7 +55,7 @@
 
   &--hidden {
     opacity: 0;
-    transform: scale(0);
+    transform: scale(0) translate(-50%, -50%);
     pointer-events: none;
     animation: none;
   }

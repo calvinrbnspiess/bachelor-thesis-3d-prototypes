@@ -4,6 +4,8 @@
 
 .prototype :global {
 
+  @extend %prototype-2;
+
   .hero {
     position: relative;
     z-index: -1;
@@ -21,7 +23,10 @@
       position: fixed;
 
       @media (max-width: 1023px) {
-        max-height: 40vh;
+        height: remcalc(600);
+        top: 0;
+        left: 0;
+        transform: translateX(0%);
       }
 
       &:after {
@@ -51,8 +56,22 @@
     display: none;
   }
 
+  .section--annotation {
+    transition: transform var(--transition-default);
+    @media (max-width: 1023px) {
+      transform: translateY(400px);
+    }
+  }
+
   .annotation-graphic__container {
     pointer-events: none;
+
+    max-height: 50vh;
+
+    @media (max-width: 1023px) {
+      max-height: 40vh;
+      justify-content: flex-end;
+    }
   }
 
 }
