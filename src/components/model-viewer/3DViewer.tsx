@@ -1,5 +1,6 @@
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { ModelViewerElement } from "@google/model-viewer/src/model-viewer";
+import Spinner from "../Spinner";
 
 declare global {
   namespace JSX {
@@ -75,6 +76,7 @@ export const ModelViewer = ({
           shadow-softness="0.3"
           {...props}
         >
+          {!loaded ? <Spinner /> : null}
           <div slot="progress-bar"></div>
           {loaded ? children : null}
         </model-viewer>

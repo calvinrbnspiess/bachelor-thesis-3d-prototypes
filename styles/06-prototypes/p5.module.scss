@@ -18,6 +18,14 @@
       }
     }
 
+    &__headline {
+      animation-delay: 2500ms;
+    }
+
+    &__content {
+      animation-delay: 1500ms;
+    }
+
     &__media {
       width: 100%;
     }

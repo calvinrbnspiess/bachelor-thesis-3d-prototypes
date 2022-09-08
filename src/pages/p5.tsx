@@ -7,7 +7,6 @@ import classnames from "classnames";
 import {
   Annotations3DViewerHotspots,
   changeProductMaterials,
-  Configurator3DViewer,
   getProductViews,
   ProductViewWithMaterialReplacements,
 } from "./p1";

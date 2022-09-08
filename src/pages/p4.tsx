@@ -33,6 +33,7 @@ const Prototype: NextPage = () => {
           src={"Rendering_Motorcycle_Anthracite_PIPETTE_GLB.glb"}
           defaultView={productConfiguratorView}
           onInitialization={(modelViewer: ModelViewerElement) => {
+            let productViews = getProductViews();
             modelViewer.addEventListener("click", (event) => {
               const material = modelViewer.materialFromPoint(
                 event.clientX,
@@ -52,7 +53,6 @@ const Prototype: NextPage = () => {
                   );
                 }, 240);
 
-                let productViews = getProductViews();
                 let view =
                   productViews.find((view) => {
                     return (
@@ -67,6 +67,8 @@ const Prototype: NextPage = () => {
                 setProductConfiguratorView(productViews.indexOf(view));
               }
             });
+
+            changeProductMaterials(modelViewer, productViews[0]);
           }}
         />
       }
