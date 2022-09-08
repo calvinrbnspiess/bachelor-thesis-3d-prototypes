@@ -63,7 +63,7 @@ const Prototype: NextPage = () => {
       className={getPrototypeStylesheet(css)}
       heroMediaSlot={
         <ModelViewer
-          src="Rendering_Motorcycle_Anthracite_GLB.glb"
+          src="Rendering_Motorcycle_Anthracite_GLB_DRACO.glb"
           camera-orbit="230deg 75deg 105%"
           onInitialization={(modelViewer) => {
             console.log("init p4 hero");

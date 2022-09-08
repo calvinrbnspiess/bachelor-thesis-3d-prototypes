@@ -5,12 +5,12 @@ import { getPrototypeStylesheet } from "../helpers/styles";
 import { Annotations3DViewer, Configurator3DViewer } from "./p1";
 import content from "../content";
 
-let model = "Rendering_Motorcycle_Anthracite_GLB_REDUCED.glb";
+let model = "Rendering_Motorcycle_Anthracite_GLB_REDUCED_DRACO.glb";
 
 const Prototype: NextPage = () => {
   return (
     <PrototypePage
-      id={"P2"}
+      id={"P3"}
       className={getPrototypeStylesheet(css)}
       heroMediaSlot={<img src={content.renderImage} />}
       configuratorSlot={

@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import PrototypePage from "../components/PrototypePage";
-import * as css from "../../styles/06-prototypes/p2.module.scss";
+import * as css from "../../styles/06-prototypes/p5.module.scss";
 import { getPrototypeStylesheet } from "../helpers/styles";
 import {
   changeProductMaterials,
@@ -20,7 +20,7 @@ const Prototype: NextPage = () => {
 
   return (
     <PrototypePage
-      id={"P2"}
+      id={"P5"}
       className={getPrototypeStylesheet(css)}
       heroMediaSlot={<img src={content.renderImage} />}
       configuratorSlot={

@@ -132,7 +132,7 @@ export const Configurator3DViewer = ({
 
   let renderView = () => (
     <ModelViewer
-      src="Rendering_Motorcycle_Anthracite_GLB.glb"
+      src="Rendering_Motorcycle_Anthracite_GLB_DRACO.glb"
       onInitialization={(modelViewer) => {
         if (!modelViewer.model) {
           return;
@@ -222,7 +222,7 @@ export const Annotations3DViewer = ({ ...props }) => (
       "annotation-graphic__container"
     )}
   >
-    <ModelViewer src="Rendering_Motorcycle_Anthracite_GLB.glb" {...props}>
+    <ModelViewer src="Rendering_Motorcycle_Anthracite_GLB_DRACO.glb" {...props}>
       <Annotations3DViewerHotspots />
     </ModelViewer>
   </div>
