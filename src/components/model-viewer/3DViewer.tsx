@@ -1,6 +1,7 @@
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { ModelViewerElement } from "@google/model-viewer/src/model-viewer";
 import Spinner from "../Spinner";
+import { reportWebVitals } from "../../pages/_app";
 
 declare global {
   namespace JSX {
@@ -44,6 +45,13 @@ export const ModelViewer = ({
 
     modelViewerElement.addEventListener("load", () => {
       setLoaded(true);
+
+      reportWebVitals({
+        name: "custom",
+        startTime: performance.now(),
+        label: "lin_prototype_model_load",
+        value: props.src,
+      });
 
       if (!disableEnhancements) {
         restoreMetalMaterials(modelViewerElement, ["metall glossy", "gray"]);
