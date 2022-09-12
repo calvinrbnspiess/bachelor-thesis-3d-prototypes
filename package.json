@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "poll:process": "cd ./scripts/lamapoll-results/ && npm run poll:process --"
   },
   "dependencies": {
     "@google/model-viewer": "^1.12.0",

@@ -1,0 +1,26 @@
+{
+  "name": "lamapoll-results",
+  "version": "1.0.0",
+  "description": "",
+  "main": "process-lamapoll-results",
+  "scripts": {
+    "poll:process": "ts-node process-lamapoll-results.ts"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/yargs": "^17.0.12",
+    "danfojs-node": "^1.1.1",
+    "neat-csv": "^7.0.0",
+    "node-xlsx": "^0.21.0",
+    "ts-node": "^10.9.1",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.18.11/xlsx-0.18.11.tgz",
+    "yargs": "^17.5.1"
+  },
+  "dependencies": {
+    "date-fns": "^2.29.2",
+    "nodeplotlib": "^1.1.2",
+    "strip-bom": "^5.0.0"
+  }
+}

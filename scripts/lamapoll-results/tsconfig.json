@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "es5",
+    "esModuleInterop": true
+  },
+  "ts-node": {
+    "esm": true
+  }
+}
