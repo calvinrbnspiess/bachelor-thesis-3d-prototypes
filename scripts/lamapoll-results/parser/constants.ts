@@ -38,9 +38,8 @@ export const ITEM_CODING: { [key: string]: ItemCoding } = {
     question: "Die Interaktion war intuitiv.",
   },
   "V3.C1": {
-    shortName: "Ablenkung",
-    dimension: [DIMENSIONS.DISTRACTION_FACTORS],
-    scalingFunction: reverseLikertCoding,
+    shortName: "Ausblendung",
+    dimension: [],
     question: "Ich konnte die reale Umgebung ausblenden.",
   },
   "V4.C1": {
@@ -65,8 +64,7 @@ export const ITEM_CODING: { [key: string]: ItemCoding } = {
   },
   "V16.C1": {
     shortName: "Reizüberflutung",
-    dimension: [DIMENSIONS.SENSORY_FACTORS],
-    scalingFunction: reverseLikertCoding,
+    dimension: [],
     question: "Ich wurde mit unterschiedlichen Reizen überflutet.",
   },
   "V8.C2": {
