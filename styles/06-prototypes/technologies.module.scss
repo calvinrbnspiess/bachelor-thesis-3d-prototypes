@@ -1,0 +1,19 @@
+@use "../01-settings/helpers" as *;
+
+.prototype :global {
+
+  /**
+    Prototype dependent styles
+   */
+
+  .hero__media {
+    width: 100vw;
+  }
+
+  iframe {
+    height: 100%;
+    transform: none;
+  }
+
+
+}

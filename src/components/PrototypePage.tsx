@@ -10,7 +10,7 @@ import {
 import { reportWebVitals } from "../pages/_app";
 import Link from "next/link";
 
-type PrototypePageProps = {
+export type PrototypePageProps = {
   id: string;
   className?: string;
   heroMediaSlot?: ReactNode;

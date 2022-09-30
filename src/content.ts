@@ -7,5 +7,5 @@ const markers: { [n: string]: string } = {
 
 export default {
   markers,
-  renderImage: "motorcycle-01-09-render4-1512-dark-blue.png",
+  renderImage: "/motorcycle-01-09-render4-1512-dark-blue.png",
 };
